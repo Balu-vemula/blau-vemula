@@ -1,4 +1,0 @@
-first line
-second line
-third line in master branch
-third line in merge conflict branch
