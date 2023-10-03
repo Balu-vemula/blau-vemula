@@ -26,9 +26,9 @@ module.exports = defineConfig({
 		},
 		env: {
 			// allureReuseAfterSpec: true
-			APP_URL: '',
-			USER_NAME: '',
-			PASSWORD: '',
+			APP_URL: Cypress.env("APP_URL"),
+			USER_NAME: Cypress.env("USER_NAME"),
+			PASSWORD: Cypress.env("3554145R@j"),
 			SelectedMonth1: "[data-value='Jun']",
 			MonthValue: 'Jun-22',
 			EnddateOfSecondMonth: "[aria-label*='July 31st']",

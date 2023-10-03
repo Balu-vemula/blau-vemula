@@ -11,7 +11,7 @@ jobs:
     env:
     APP_URL: ${{secrets.APP_URL}}
     USER_NAME: ${{USER_NAME}}
-    PASSWORD: ${{PASSWORD}}
+    PASSWORD: ${{PASSWORD}} 
 
     steps:
       - uses: docker/setup-buildx-action@v1
