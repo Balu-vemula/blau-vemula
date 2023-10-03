@@ -3,14 +3,15 @@ name: Building Docker Image For Cypress and Running It
 on:
   push:
     branches:
-      - master
+    - testactions
 
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
 
     steps:
-       - uses: actions/checkout@v2
+      - uses: docker/setup-buildx-action@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
       - run: node -v
 
@@ -19,4 +20,4 @@ jobs:
       
 
       - name: Run smoke
-        run: sudo docker run -it   -e env=dev -e TAGS=smoke wm-test-cypress-image
+        run: docker run -t  -v ${GITHUB_WORKSPACE}/cypress.qa.config.js:/app/cypress.qa.config.js -e env=qa -e TAGS=smoke wm-test-cypress-image
