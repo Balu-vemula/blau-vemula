@@ -1,0 +1,21 @@
+name: Building Docker Image For Cypress and Running It
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v
+
+      - name: Build Docker Image
+        run: docker build -f dockerfile -t wm-test-cypress-image .
+      
+
+      - name: Run smoke
+        run: sudo docker run -it   -e env=dev -e TAGS=smoke wm-test-cypress-image
