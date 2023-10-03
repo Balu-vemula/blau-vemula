@@ -8,6 +8,10 @@ on:
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
+    env:
+    APP_URL: ${{secrets.APP_URL}}
+    USER_NAME: ${{USER_NAME}}
+    PASSWORD: ${{PASSWORD}}
 
     steps:
       - uses: docker/setup-buildx-action@v1
