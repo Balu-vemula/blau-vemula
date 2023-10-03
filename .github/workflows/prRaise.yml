@@ -3,7 +3,7 @@ name: Building Docker Image For Cypress and Running It
 on:
   pull_request:
     branches:
-      - master
+      - testactions
 
 jobs:
   build-and-run:
