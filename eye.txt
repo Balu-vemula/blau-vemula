@@ -1,0 +1,4 @@
+ env:
+    APP_URL: ${{secrets.APP_URL}}
+    USER_NAME: ${{USER_NAME}}
+    PASSWORD: ${{PASSWORD}} 
