@@ -19,4 +19,4 @@ jobs:
       
 
       - name: Run smoke
-        run: sudo docker run -it  -v ${GITHUB_WORKSPACE}/cypress.qa.config.js:app/cypress.qa.config.js -e env=qa -e TAGS=smoke wm-test-cypress-image
+        run: docker run -it  -v ${GITHUB_WORKSPACE}/cypress.qa.config.js:app/cypress.qa.config.js -e env=qa -e TAGS=smoke wm-test-cypress-image
