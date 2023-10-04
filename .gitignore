@@ -1,0 +1,7 @@
+/node_modules
+/cypress/screenshots
+/cypress/videos
+/cypress/downloads
+/cypress.qa.config.js
+/cypress.dev.config.js
+/cypress.production.config.js

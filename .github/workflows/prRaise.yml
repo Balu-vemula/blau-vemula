@@ -6,15 +6,23 @@ on:
       - testactions
 
 jobs:
-  build-and-run:
+  cypress-run:
     runs-on: ubuntu-latest
-    
+    env: 
+      CYPRESS_QA_CONFIG: ${{ secrets.CYPRESS_QA_CONFIG }}
+      # APP_URL: ${{ secrets.APP_URL }}
+      # USER_NAME: ${{ secrets.USER_NAME }}
+      # PASSWORD: ${{ secrets.PASSWORD }} 
+      
 
     steps:
       - uses: docker/setup-buildx-action@v1
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
       - run: node -v
+      - name: store env as file
+        run: |
+          echo "${CYPRESS_QA_CONFIG}" > cypress.qa.config.js
 
       - name: Build Docker Image
         run: docker build -f dockerfile -t wm-test-cypress-image .

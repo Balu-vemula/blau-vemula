@@ -7,7 +7,7 @@ export class Dependencies extends BaseDependencies {
 
 	loginWashmetrix() {
 		this.washmetrixLogIn(Cypress.env('APP_URL'))
-		cy.screenshot()
+		// cy.screenshot()
 	}
 }
 
