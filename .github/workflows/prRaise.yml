@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       CYPRESS_QA_CONFIG: ${{ secrets.CYPRESS_QA_CONFIG }}
-      # APP_URL: ${{ secrets.APP_URL }}
+      APP_URL: ${{ secrets.APP_URL }}
       # USER_NAME: ${{ secrets.USER_NAME }}
       # PASSWORD: ${{ secrets.PASSWORD }} 
       
@@ -21,12 +21,11 @@ jobs:
       - uses: actions/setup-node@v3
       - run: node -v
       - name: store env as file
-        run: |
-          echo "${CYPRESS_QA_CONFIG}" > cypress.qa.config.js
+       
 
       - name: Build Docker Image
         run: docker build -f dockerfile -t wm-test-cypress-image .
       
 
       - name: Run smoke
-        run: docker run -t  -v ${GITHUB_WORKSPACE}/cypress.qa.config.js:/app/cypress.qa.config.js -e env=qa -e TAGS=smoke wm-test-cypress-image
+        run: docker run -t  -v ${GITHUB_WORKSPACE}/cypress.qa.config.js:/app/cypress.qa.config.js -e env=qa -e url= ${APP_URL} -e TAGS=smoke wm-test-cypress-image
