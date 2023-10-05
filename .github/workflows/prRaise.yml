@@ -9,11 +9,11 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    env: 
-      # CYPRESS_QA_CONFIG: ${{ secrets.CYPRESS_QA_CONFIG }}
-      #  APP_URL: ${{ secrets.APP_URL }}
-      # USER_NAME: ${{ secrets.USER_NAME }}
-      # PASSWORD: ${{ secrets.PASSWORD }} 
+    # env: 
+    #   # CYPRESS_QA_CONFIG: ${{ secrets.CYPRESS_QA_CONFIG }}
+    #   #  APP_URL: ${{ secrets.APP_URL }}
+    #   # USER_NAME: ${{ secrets.USER_NAME }}
+    #   # PASSWORD: ${{ secrets.PASSWORD }} 
       
 
     steps:
