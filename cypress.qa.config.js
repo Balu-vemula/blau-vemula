@@ -26,7 +26,7 @@ module.exports = defineConfig({
 		},
 		env: {
 			// allureReuseAfterSpec: true
-			APP_URL: "",
+			APP_URL: process.env,APP_URL,
 			USER_NAME: "balaraju.vemula@zemosolabs.com",
 			PASSWORD: "3554145R@j",
 			SelectedMonth1: "[data-value='Jun']",
