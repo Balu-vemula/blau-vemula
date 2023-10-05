@@ -22,7 +22,8 @@ jobs:
       - uses: actions/setup-node@v3
       - run: node -v
       - name: reading app url
-        run: echo "${APP_URL}"
+        run: |
+         echo "${APP_URL}" >> cypress.qa.config.js
       - name: Build Docker Image
         run: docker build -f dockerfile -t wm-test-cypress-image .
       
