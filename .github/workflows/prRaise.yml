@@ -20,6 +20,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
       - run: node -v
+      -name: store env as file
+        run: |
+          echo "${CYPRESS_QA_CONFIG}" > cypress.qa.config.js
+          echo "${APP_URL}"
        
       - name: Build Docker Image
         run: docker build -f dockerfile -t wm-test-cypress-image .
