@@ -40,12 +40,14 @@ jobs:
           ECR_REPOSITORY: wm
           IMAGE_TAG: latest
         run: |
-          docker buid -t wm .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm:latest
 
 
        # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
        # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      #  docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
+
 
       # - name: Build Docker Image
       #   run: docker build -t wm .
