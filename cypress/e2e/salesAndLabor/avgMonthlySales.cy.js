@@ -13,7 +13,7 @@ const dependencies = new Dependencies()
 context('Verifying the functionality of Avg.Monthly Sales KPI', () => {
 
 	describe('Verifying the functionality of Avg.Monthly Sales KPI', () => {
-		// RoleFilter(['smoke', 'regression'], () => {
+		RoleFilter(['smoke', 'regression'], () => {
 			before('Login in to washmetrix', () => {
 				cy.clearAllSessionStorage()
 				cy.clearAllLocalStorage()
@@ -22,13 +22,13 @@ context('Verifying the functionality of Avg.Monthly Sales KPI', () => {
 				robotEyes.seesWashmetrixOrg()
 				robotHands.clickOnWashmetrixCarWashOrg()
 			})
-		// })
-		// RoleFilter(['smoke', 'regression'], () => {
+		})
+		RoleFilter(['smoke', 'regression'], () => {
 			it('Navigating to Sales and Labor nodule', () => {
 				robotEyes.seesSalesAndLaborIcon()
 				robotHands.clickOnSalesAndLaborIcom()
 			})
-		// })
+		})
 		RoleFilter(['smoke', 'regression'], () => {
 			it('Verify the title of the KPI', () => {
 				robotEyes.seesTitleOfAverageMonthlySales()
