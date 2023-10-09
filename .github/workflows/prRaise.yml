@@ -59,9 +59,6 @@ jobs:
       #  docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
       #  docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
       #     docker push public.ecr.aws/z8m5n0c2/wm:latest
-
-
-
       - name: Build Docker Image
         # run: docker build -t wm:latest .
         run: |
