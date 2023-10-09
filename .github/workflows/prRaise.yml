@@ -34,17 +34,15 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: build,tag and push image to Amazon ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: wm
-          IMAGE_TAG: latest
-        run: |
-          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/z8m5n0c2
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
-          docker push public.ecr.aws/z8m5n0c2/wm:latest
-
+      # - name: build,tag and push image to Amazon ECR
+      #   env:
+      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     ECR_REPOSITORY: wm
+      #     IMAGE_TAG: latest
+      #   run: |
+      #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+      #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+         
       
     #  docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm:latest
 
@@ -52,11 +50,14 @@ jobs:
        # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
        # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       #  docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
+      #  docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
+      #     docker push public.ecr.aws/z8m5n0c2/wm:latest
 
 
-      # - name: Build Docker Image
-      #   run: docker build -t wm .
 
-      # - name: Push Docker image to ECR
-      #   run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm:latest
+      - name: Build Docker Image
+        run: docker build -t wm .
+
+      - name: Push Docker image to ECR
+        run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm
 
