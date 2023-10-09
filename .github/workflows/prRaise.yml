@@ -69,5 +69,5 @@ jobs:
 
 
       - name: Push Docker image to ECR
-        run: docker --push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm
+        run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm
 
