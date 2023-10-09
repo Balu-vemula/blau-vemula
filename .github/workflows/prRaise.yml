@@ -69,8 +69,8 @@ jobs:
           docker buildx create --use
           docker buildx build -t wm:latest .
 
-      - name: Tagging image with ECR Repo
-        run: docker tag wm:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm
+      # - name: Tagging image with ECR Repo
+      #   run: docker tag wm:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm
 
 
       - name: Push Docker image to ECR
