@@ -60,14 +60,14 @@ jobs:
       #  docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
       #     docker push public.ecr.aws/z8m5n0c2/wm:latest
       - name: Build Docker Image
-        # run: docker build -t wm .
-        run: |
-          docker buildx create --use
-          docker buildx build -t wm .
+        run: docker build -t wm .
+        # run: |
+        #   docker buildx create --use
+        #   docker buildx build -t wm .
       - name: Tagging image with ECR Repo
         run: docker tag wm ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm
 
 
       - name: Push Docker image to ECR
-        run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm
+        run: docker --push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm
 
