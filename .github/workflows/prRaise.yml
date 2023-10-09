@@ -41,14 +41,14 @@ jobs:
       #     docker build -t wm .
       #     docker push $ECR_REGISTRY/$ECR_REPOSITORY
 
-      - name: build,tag and push image to Amazon ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: wm-cypress
-          # IMAGE_TAG: latest
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY
+      # - name: build,tag and push image to Amazon ECR
+      #   env:
+      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     ECR_REPOSITORY: wm-cypress
+      #     # IMAGE_TAG: latest
+      #   run: |
+      #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY .
+      #     docker push $ECR_REGISTRY/$ECR_REPOSITORY
          
       
     #  docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm:latest
@@ -59,15 +59,15 @@ jobs:
       #  docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
       #  docker tag wm:latest public.ecr.aws/z8m5n0c2/wm:latest
       #     docker push public.ecr.aws/z8m5n0c2/wm:latest
-      # - name: Build Docker Image
-      #   # run: docker build -t wm .
-      #   run: |
-      #     docker buildx create --use
-      #     docker buildx build -t wm-cypress .
-      # - name: Tagging image with ECR Repo
-      #   run: docker tag wm-cypress ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm-cypress
+      - name: Build Docker Image
+        run: docker build -t wm-cypress .
+        # run: |
+        #   docker buildx create --use
+        #   docker buildx build -t wm-cypress .
+      - name: Tagging image with ECR Repo
+        run: docker tag wm-cypress ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm-cypress
 
 
-      # - name: Push Docker image to ECR
-      #   run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm-cypress
+      - name: Push Docker image to ECR
+        run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/wm-cypress
 
