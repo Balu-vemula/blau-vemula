@@ -27,7 +27,6 @@ RUN ls -la /app/
 # cypress/support/filter.ts
 
 RUN npm install
-RUN npx cypress install
 RUN npm ci
 RUN npm --version
 RUN npx cypress verify 
