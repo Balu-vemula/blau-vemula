@@ -21,7 +21,6 @@ jobs:
       - uses: actions/setup-node@v3
       - run: node -v
        
-
       - name: Build Docker Image
         run: docker build -f Dockerfile -t wm-test-cypress-image .
       
