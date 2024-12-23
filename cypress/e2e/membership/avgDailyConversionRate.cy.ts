@@ -1,0 +1,142 @@
+import '../../support/e2e'
+import {
+	RobotEyes,
+	RobotHands,
+	Dependencies,
+} from '../../robots/wm/membership/avgDailyConversionRate'
+import RoleFilter from '../../support/filter'
+
+const robotEyes = new RobotEyes()
+const robotHands = new RobotHands()
+const dependencies = new Dependencies()
+
+context('Verifying the functionality of Conversion Rate KPI', () => {
+	describe('Verifying the functionality of Conversion Rate KPI', () => {
+		RoleFilter(['smoke', 'regression'], () => {
+			before('Login in to washmetrix', () => {
+				cy.clearAllSessionStorage()
+				cy.clearAllLocalStorage()
+				cy.clearAllCookies()
+				dependencies.loginWashmetrix()
+				robotHands.scrollingIntoOrganisation()
+				robotEyes.seesWashmetrixOrg()
+				robotHands.clickOnWashmetrixCarWashOrg()
+			})
+		 })
+		 RoleFilter(['smoke', 'regression'], () => {
+			it('Navigating to Membership Module', () => {
+				robotEyes.seesMembershipIcon()
+				robotHands.clickOnMembershipIcon()
+			})
+		 })
+		 RoleFilter(['smoke', 'regression'], () => {
+			it('Verifying the title of the KPI', () => {
+				robotHands.scrollingIntoConversionRateTile()
+				robotEyes.seesTitleOfConversionRate()
+				robotEyes.verifyingTheTitleOfConversionRateWithDefaultDatePickerFrequency('Conversion Rate (MTD)')
+			})
+			it('Verifying the graph and the value of the Conversion Rate on the tile view', () => {
+				robotHands.scrollingIntoConversionRateTile()
+				robotHands.clickOnMembershipIcon()
+				//robotHands.verifiyingTheTileWithDefaultFrequency(Cypress.env('AvgDailyConversionRate'),'avg_daily_conversion_rate')
+			})
+			it('Verifying the functionality of the date picker on the tile view', () => {
+				robotHands.scrollingToSeeDatePicker()
+				robotEyes.seesDatepickerIsVisibleOnModuleView()
+				robotHands.clicksOnDatePicker()
+				robotHands.selectsTrailing12OnTileView()
+				robotHands.scrollingIntoConversionRateTileAfterChangingTheFrequencyFromDefault()
+				robotEyes.veryfingTheTitleOfConversionRateTileViewAfterChangingTheFrequencyFromDefault()
+			})
+			it('Verifying the Conversion Rate drill-down view', () => {
+				robotHands.clickOnConversionRateTile()
+				robotEyes.seesBacktoMembershipVisibleOnDrillDownView()
+				robotEyes.seesTopNavigationBarIsVisibleOnDrillDownView()
+				robotEyes.seesDatePickerIsVisibleOnDrillDownView()
+				robotEyes.seesEllipsisForExportOption()
+				robotEyes.seesTheTitleOfTheGraphAndTable()
+				robotEyes.verifyingTheTitleOfTheGraphAndTable()
+				robotEyes.seesGraphOnDrillDownView()
+				robotEyes.seesTableOnDrillDownView()
+				robotHands.clickOnTopNavigationBarInDrillDownView()
+				robotEyes.seesTheSerchBoxAfterClickingTheTopNavigationBar()
+				robotEyes.verifyingTheSerchBoxAfterClickingTheTopNavigationBarInDrillDownView()
+				robotEyes.verifyingTheTopNavigationBarLocationsInDrillDownView()
+				robotEyes.verifyTheCancelButtonInTheLocationInDrillDownViewForConversionRate()
+				robotEyes.verifyTheApplyButtonInTheLocationInDrillDownViewForConversionRate()
+				robotHands.clickOnApplyButton1()
+			})
+		 })
+		 RoleFilter(['regression'], () => {
+			it('Verifying the context of Table', () => {	
+				robotEyes.verifyingTheFirstColumnHeaderOfTable('Period')
+				robotEyes.seesTheSortButtonsForPeriod()
+				robotEyes.verifyingTheSecondColumnHeaderOfTable('Members (#)')
+				robotEyes.seesTheSortButtonsForMembers()
+				robotEyes.verifyingTheThirdColumnHeaderOfTable('Sales ($)')
+				robotEyes.seesTheSortButtonsForSales()
+				robotEyes.verifyingTheFourthColumnHeaderOfTable('Avg. Ticket ($)')
+				robotEyes.seesTheSortButtonsForAverageTicket()
+				robotEyes.verifyingTheFifthColumnHeaderOfTable('Individual Washes (#)')
+				robotEyes.seesTheSortButtonsForIndividualWashes()
+				robotEyes.verifyingTheSixthColumnHeaderOfTable('Conversion Rate (%)')
+				robotHands.clickOnDatePickerInDrillDownView()
+				robotEyes.verifyTheDatePickerFrequenciesInDrillDownViewForConversionRate()
+				robotEyes.verifyTheCancelButtonInTheDatePickerInDrillDownViewForConversionRate()
+				robotEyes.verifyTheApplyButtonInTheDatePickerInDrillDownViewForConversionRate()
+				robotHands.clickOnYearDropDownInTheDatePicker()
+				robotHands.selectYearFromTheYearDropDownInDatePicker()
+				robotHands.clickOnMonthDropDownInTheDatePicker()
+				robotHands.selectMonthFromTheMonthlyDropDownInDatePicker()
+				robotHands.selectFirstDayInTheDateRange()
+				robotHands.clickOnNextMonthIcon()
+				robotHands.selectLastDayInTheDateRange()
+				robotHands.clickOnApplyButton()
+				robotEyes.seesFrequencyFilter()
+				robotHands.clickOnFrequencyFilter()
+				robotEyes.seesQuarterlyFilterOption()
+				robotHands.clickOnQuarterlyFilterOption()
+				//robotHands.verifyingQuarterlyFrequency(Cypress.env('AvgDailyConversionRate'))
+				robotHands.clickOnFrequencyFilter()
+				robotEyes.seesYearlyFilterOption()
+				robotHands.clickOnYearlyFilterOption()
+				//robotHands.verifyingYearlyFrequency(Cypress.env('AvgDailyConversionRate'))
+				robotHands.clickOnFrequencyFilter()
+				robotEyes.seesDailyFilterOption()
+				robotHands.clickOnDailyFilterOption()
+				//robotHands.verifyingDailyFrequency(Cypress.env('AvgDailyConversionRate'))
+				robotHands.clickOnFrequencyFilter()
+				robotEyes.seesMonthlyFilterOption()
+				robotHands.clickOnMonthlyFilterOption()
+				//robotHands.verifyingMonthlyFrequency(Cypress.env('AvgDailyConversionRate'))
+				//robotEyes.verifyingStartTimeOnTheTable()
+			})
+			it('Verifying the functionality of sort', () => {
+				robotHands.clicksOnDescendingOrderPeriodButton()
+				robotHands.clicksOnAscendingOrderPeriodButton()
+				robotHands.clicksOnDescendingOrderNewMembersButton()
+				robotHands.clicksOnAscendingOrderNewMembersButton()
+				robotHands.clicksOnDescendingOrderNewMemSalesButton()
+				robotHands.clicksOnAscendingOrderNewMemSalesButton()
+				robotHands.clicksOnDescendingOrderAverageTicketButton()
+				robotHands.clicksOnAscendingOrderAverageTicketButton()
+				robotHands.clicksOnDescendingOrderIndividualWashesButton()
+				robotHands.clicksOnAscendingOrderIndividualWashesButton()
+				robotHands.clicksOnDescendingOrderConversionRateButton()
+				robotHands.clicksOnAscendingOrderConversionRateButton()
+			})
+			it('Verifying the functionality of Export', () => {
+				robotHands.clicksOnElipsisIconOnDrillDownView()
+				robotEyes.verifyingTheExportButtonIsVisible()
+				robotHands.clicksOnExportOption();
+				robotHands.clickingOnEscapeButtonToCloseTheExportOption()
+			})
+		 })
+		 RoleFilter(['smoke', 'regression'], () => {
+			it('Verifying the functionality of Back to all sites', () => {
+				robotHands.clickOnBackToMembershipButton()
+				robotEyes.verifyingTheMembershipModuleHeader()
+			})
+		})
+	})
+})
