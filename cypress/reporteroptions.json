@@ -1,0 +1,16 @@
+{
+    "reporterEnabled": "cypress-mochawesome-reporter",
+    "cypressMochawesomeReporterReporterOptions": {
+        "reportDir": "cypress/reports",
+        "charts": true,
+        "reportPageTitle": "UI Automation Test Report",
+        "reportFilename": "report",
+        "embeddedScreenshots": true,
+        "ignoreVideos": true,
+        "inlineAssets": true,
+        "quiet": true,
+        "overwrite": false,
+        "html": true,
+        "json": true
+    }
+}
