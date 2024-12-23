@@ -11,5 +11,5 @@ RUN npx cypress verify
 COPY sendReportToMail.js .
 COPY sendReportToTeam.js .
 
-RUN chmod a+x ./ci-script/cypress.sh
-CMD [ "./ci-script/cypress.sh" ]
+RUN chmod a+x ./ci-Scripts/cypress.sh
+CMD [ "./ci-Scripts/cypress.sh" ]
