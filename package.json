@@ -23,7 +23,7 @@
     "cypress:generate-html-report": "marge cypress/reports/merged-report.json -f report -o cypress/reports",
     "cypress:parllel": "concurrently \"npx cypress run --spec 'cypress/e2e/accounting/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/membership/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/configuration/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/consolodatedReport/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/pacing/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/periodVsPeriod/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/permission/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/salesAndLabor/**/*.cy.ts' --env TAGS=regression\"",
     "cy:run": "cypress run ",
-     "cy:parallel": "cypress-parallel -s cy:run -t 4 -d cypress/e2e  -a '\"--browser electron --env TAGS=regression\"'"
+     "cy:parallel": "cypress-parallel -s cy:run -t 8 -d cypress/e2e  -a '\"--browser electron --env TAGS=regression\"'"
   },
   "author": "",
   "license": "ISC",
