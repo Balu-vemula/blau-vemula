@@ -4,9 +4,9 @@ const RoleFilter = (definedTags: string[], runTest: Function) => {
 		const isFound = definedTags.some((definedTag) => tags.includes(definedTag))
 
 		if (isFound) {
-			runTest();
+			runTest()
 		}
 	}
 }
 
-export default RoleFilter;
+export default RoleFilter

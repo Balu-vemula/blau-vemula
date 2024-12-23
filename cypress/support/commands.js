@@ -23,7 +23,6 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-{/* <reference types="cypress" /> */}
 import 'cypress-localstorage-commands'
 
 Cypress.Commands.add('logIn', () => {
@@ -66,11 +65,10 @@ Cypress.Commands.add('taggedIt', (tags, callback) => {
 				envConfig = require('../../cypress.qa.config')
 				break
 			case 'prod':
-				envConfig = require('../../cypress.production.config')
+				envConfig = require('../../cypress.prod.config')
 				break
-			default:
-				throw new Error(`Unknown environment: ${Cypress.env('env')}`)
 		}
 		Cypress.config('env', envConfig)
 	})
 })
+

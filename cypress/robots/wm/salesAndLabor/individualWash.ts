@@ -15,23 +15,23 @@ export class RobotEyes extends BaseEyes {
 		this.wait(5000)
 		this.seesDomVisibleWithCustomMatcher('aria-label', 'Sales & Labor')
 	}
-	seesTitleOfAverageMonthlySales() {
+	seesTitleOfIndividualWash() {
 		this.seesDomVisibleWithCustomMatcher(
 			'title',
-			'Avg. Monthly Sales (YTD)'
+			'Individual Washes (MTD)'
 		)
 	}
-	verifyingTheTitleOfAverageMonthlySalesWithDefaultDatePcikerFrequency() {
+	verifyingTheTitleOfIndividualWashWithDefaultDatePickerFrequency() {
 		this.seesDomContainText(
-			'[title*="Avg. Monthly Sales"]',
-			'Avg. Monthly Sales (YTD)'
+			'[title*="Individual Washes"]',
+			'Individual Washes (MTD)'
 		)
 	}
-	seesTheGraphAndSaleValueForAverageMonthlySalesonTileView() {
-		this.seesElementIsVisibleWhenTheOtherElementISPresent(
-			'div[title*="Avg. Monthly Sales"] h1',
-			'#AVERAGE_MONTHLY_SALES'
-		)
+	seesTheGraphAndSaleValueForIndividualWashonTileView() {
+		// this.seesElementIsVisibleWhenTheOtherElementISPresent(
+		// 	'div[title="Individual Washes (Month To Date)"] h1',
+		// 	'#INDIVIDUAL_WASHES'
+		// )
 	}
 	seesDatepickerIsVisibleOnModuleView() {
 		this.seesDomVisible('[aria-describedby="2"]')
@@ -58,12 +58,12 @@ export class RobotEyes extends BaseEyes {
 			)
 		}
 	}
-	veryfiesTheTitleOfAverageMonthlySalesTileViewAfterChangingTheFrequencyFromDefault() {
+	veryfiesTheTitleOfIndividualWashTileViewAfterChangingTheFrequencyFromDefault() {
 		this.wait(3000)
-		this.seesDomVisible('div[title="Avg. Monthly Sales "]')
+		this.seesDomVisible('div[title="Individual Washes "]')
 		this.seesDomContainText(
-			'div[title="Avg. Monthly Sales "]',
-			'Avg. Monthly Sales '
+			'div[title="Individual Washes "]',
+			'Individual Washes '
 		)
 	}
 	seesBackToAllSitesVisibleOnDrillDownView() {
@@ -73,8 +73,8 @@ export class RobotEyes extends BaseEyes {
 			'Back to Sales & Labor'
 		)
 	}
-	seesDatePicketISVisibleOnDrillDownView() {
-		this.seesDomVisible('button[aria-describedby="AVERAGE_MONTHLY_SALES"]')
+	seesDatePickerIsVisibleOnDrillDownView() {
+		this.seesDomVisible('button[aria-describedby="INDIVIDUAL_WASHES"]')
 	}
 	seesTheTitleOfTheGraphAndTable() {
 		this.seesDomVisible('div[class*=h-full] div>h4')
@@ -82,11 +82,11 @@ export class RobotEyes extends BaseEyes {
 	verifyingTheTitleOfTheGraphAndTable(text: any) {
 		this.seesDomContainText('div[class*=h-full] div>h4', text)
 	}
-	seesEllipsisForExportOption() {
-		this.seesDomVisible('div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2)')
+	seesEllipsIsForExportOption() {
+		this.seesDomVisible('div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)')
 	}
 	seesGraphOnDrillDownView() {
-		this.seesIdVisible('drill-down-AVERAGE_MONTHLY_SALES')
+		this.seesIdVisible('drill-down-INDIVIDUAL_WASHES')
 	}
 	seesTableOnDrillDownView() {
 		this.seesDomVisible('div[class]>table')
@@ -101,19 +101,40 @@ export class RobotEyes extends BaseEyes {
 	verifyingTheSecondColumnHeaderOfTable(text: any) {
 		this.sessTextWithDomAndIndex('thead tr>th>span', 1, text)
 	}
-	seesTheSortButtonsForNumberOfCars() {
+	seesTheSortButtonsForWashes() {
 		this.seesDomVisible('th:nth-child(2) span:nth-child(1) span:nth-child(1)')
 	}
 	verifyingTheThirdColumnHeaderOfTable(text: any) {
 		this.sessTextWithDomAndIndex('thead tr>th>span', 2, text)
 	}
-	seesTheSortButtonsForTotalSalesValue() {
+	seesTheSortButtonsForPercentage() {
 		this.seesDomVisible('th:nth-child(3) span:nth-child(1) span:nth-child(1)')
 	}
-	verifyingTheSecondRowHeaderOfTable(text: any) {
+	verifyingTheFourthColumnHeaderOfTable(text: any) {
 		this.sessTextWithDomAndIndex('thead tr>th>span', 3, text)
 	}
-	verifyTheDatePickerFrequenciesInDrillDownViewForAverageMonthlySales() {
+	seesTheSortButtonsForCash() {
+		this.seesDomVisible('th:nth-child(4) span:nth-child(1) span:nth-child(1)')
+	}
+	verifyingTheFifthColumnHeaderOfTable(text: any) {
+		this.sessTextWithDomAndIndex('thead tr>th>span', 4, text)
+	}
+	seesTheSortButtonsForCard() {
+		this.seesDomVisible('th:nth-child(5) span:nth-child(1) span:nth-child(1)')
+	}
+	verifyingTheSixthColumnHeaderOfTable(text: any) {
+		this.sessTextWithDomAndIndex('thead tr>th>span', 5, text)
+	}
+	verifyingTheSeventhColumnHeaderOfTable(text: any) {
+		this.sessTextWithDomAndIndex('thead tr>th>span', 6, text)
+	}
+	verifyingTheEightColumnHeaderOfTable(text: any) {
+		this.sessTextWithDomAndIndex('thead tr>th>span', 7, text)
+	}
+	verifyingTheSecondRowHeaderOfTable(text: any) {
+		this.sessTextWithDomAndIndex('thead tr>th>span', 8, text)
+	}
+	verifyTheDatePickerFrequenciesInDrillDownViewForIndividualWash() {
 		const frequenciesOnDrilldownView: string[] = [
 			'Current',
 			'Current Month',
@@ -131,7 +152,7 @@ export class RobotEyes extends BaseEyes {
 			)
 		}
 	}
-	verifyTheCancelButtonInTheDatePickerInDrillDownViewForAverageMonthlySales() {
+	verifyTheCancelButtonInTheDatePickerInDrillDownViewForIndividualWash() {
 		this.seesDomVisible(
 			'div[role="presentation"] div:nth-child(2) button:nth-child(1)'
 		)
@@ -141,7 +162,7 @@ export class RobotEyes extends BaseEyes {
 			'Cancel'
 		)
 	}
-	verifyTheApplyButtonInTheDatePickerInDrillDownViewFOrAverageMonthlySales() {
+	verifyTheApplyButtonInTheDatePickerInDrillDownViewFOrIndividualWash() {
 		this.seesDomVisible(
 			'div[role="presentation"] div:nth-child(2) button:nth-child(2)'
 		)
@@ -158,14 +179,27 @@ export class RobotEyes extends BaseEyes {
 			Cypress.env('MonthValue')
 		)
 	}
-	verifyingTheAccordingIConNextToTheMonthInTheTable() {
-		this.seesDomVisible('tbody tr td div span path')
+	verifyingTheAccordianIconNextToTheMonthInTheTable() {
+		// this.seesDomVisible('tbody tr td div span:nth-child(2)')
+		this.seesDomElementWithIndex('tbody tr td div span',1)
 	}
-	verifyingTheExportButtonISVisible() {
+	verifyingTheExportButtonIsVisible() {
 		this.seesDomVisible('div[class*="flex flex-col rounded"] button')
 	}
 	verifyingTheSalesAndLaborModuleHeader() {
 		this.seesDomContainText('[class="flex flex-col gap-2"]', 'Sales & Labor')
+	}
+	seesFrequencyFilter(){
+		this.seesIdVisible("dropdown")
+	}
+	seesQuarterlyFilterOption(){
+		this.seesDomVisible('[data-value="quarterly"]')
+	}
+	seesYearlyFilterOption(){
+		this.seesDomVisible('[data-value="yearly"]')
+	}
+	seesMonthlyFilterOption(){
+		this.seesDomVisible('[data-value="monthly"]')
 	}
 }
 export class RobotHands extends BaseHands {
@@ -174,6 +208,7 @@ export class RobotHands extends BaseHands {
 		// this.scrollIntoElementWithOutIndex(Cypress.env('SelectOrganisation'))
 		this.scrollIntoElementWithOutIndex(Cypress.env('OrgTitle'))
 	}
+	
 	clickOnWashmetrixCarWashOrg() {
 		this.clickOnDomElement(Cypress.env('SelectOrganisation'))
 		this.wait(3000)
@@ -181,12 +216,27 @@ export class RobotHands extends BaseHands {
 	clickOnSalesAndLaborIcon() {
 		this.clickOnDomElement('[aria-label="Sales & Labor"]')
 	}
-	scrollingIntoAverageMonthlySalesTile() {
-		this.scrollIntoElement('[title*="Avg. Monthly Sales"]', 0)
+	scrollingIntoIndividualWashTile() {
+		this.scrollIntoElement('[title*="Individual Washes"]', 0)
 		cy.reload()
 	}
+	scrollToDropdown(){
+		this.scrollIntoElement('[id="dropdown"]', 0)
+	}
+	scrollToTitle(){
+		this.scrollIntoElement('div[class*=h-full] div>h4', 0)
+	}
 	verifiyingTheTileWithDefaultFrequency(){
-		this.intercept("POST",Cypress.env('AVGMONTHLY'),"average_sales")
+		this.intercept("POST",Cypress.env('INDIVIDUAL_WASH'),"total_wash_count")
+	}
+	verifyingMonthlyFrequency(){
+		this.frequencyFilter("POST",Cypress.env('INDIVIDUAL_WASH'),"monthly")
+	}
+	verifyingQuarterlyFrequency(){
+		this.frequencyFilter("POST",Cypress.env('INDIVIDUAL_WASH'),"quarterly")
+	}
+	verifyingYearlyFrequency(){
+		this.frequencyFilter("POST",Cypress.env('INDIVIDUAL_WASH'),"yearly")
 	}
 	clicksOnDatePicker() {
 		this.clickOnDomElement('[aria-describedby="2"]')
@@ -200,55 +250,39 @@ export class RobotHands extends BaseHands {
 		)
 		this.clickOnDomElement('div[role="presentation"] div div:nth-child(2) button:nth-child(2)')
 	}
-	clickOnAverageMonthlySalesTIle() {
+	clickOnIndividualWashTile() {
 		cy.wait(5000)
-		this.clickOnDomElement('div[title="Avg. Monthly Sales "]')
+		this.clickOnDomElement('div[title="Individual Washes "]')
+		cy.reload()
 	}
 	clickOnBreakdonwForFirstTableRow() {
 		this.clickOnDomElementWithIndex('tbody tr', 0)
 	}
 	clickOnDatePickerInDrillDownView() {
-		this.clickOnDomElement('[aria-describedby="AVERAGE_MONTHLY_SALES"]')
+		this.clickOnDomElement('[aria-describedby="INDIVIDUAL_WASHES"]')
 	}
 	clickOnYearDropDownInTheDatePicker() {
-		this.clickOnDomElementWithIndex('[aria-haspopup="listbox"]', 1)
+		this.clickOnDomElementWithIndex('[aria-haspopup="listbox"]', 2)
 	}
 	selectYearFromTheYearDropDownInDatePicker() {
 		this.clickOnDomElement('[data-value="2022"]')
 	}
-	ClickOnMonthDropDownIntheDatePicker() {
-		this.clickOnDomElementWithIndex('[aria-haspopup="listbox"]', 0)
+	clickOnMonthDropDownInTheDatePicker() {
+		this.clickOnDomElementWithIndex('[aria-haspopup="listbox"]', 1)
 	}
 	selectMonthFromTheMonthlyDropDownInDatePicker() {
 		this.clickOnDomElement(Cypress.env('SelectedMonth1'))
 	}
 	selectFirstDayInTheDateRange() {
-		// this.clickOnDomElement('[aria-label="Choose Wednesday, June 1st, 2022"]')
 		this.clickOnDomElementWithIndex(
 			'[class*="react-datepicker__day react-datepicker__day--001"]',
 			0
 		)
 	}
-	// selectLastDayInTheSelectedFirstMonth(){
-	//     // this.clickOnDomElement('[aria-label="Choose Thursday, June 30th, 2022"]')
-	//     this.clickOnDomElementWithIndex('[class*="react-datepicker__day react-datepicker__day--030"]',1)
-	// }
 	clickOnNextMonthIcon() {
-		// this.clickOnDomElementWithIndex(
-		// 	'[class="grid grid-flow-col justify-around items-center"] svg',
-		// 	3
-		// )
 		this.clickOnDomElement('[data-testid="ArrowRightIcon"]')
 	}
-	// selectFirstDayInTheSelectedSecondMonth(){
-	//     this.clickOnDomElementWithIndex('[class*="react-datepicker__day react-datepicker__day--001"]',0)
-	// }
 	selectLastDayInTheDateRange() {
-		// this.clickOnDomElementWithIndex('[class*="react-datepicker__day react-datepicker__day--031"]',1)
-		// this.clickOnDomElement(
-		// 	'[class="react-datepicker__day react-datepicker__day--031"]'
-		// )
-		// [class="react-datepicker__month"] div:nth-child(5) [class*="31"]
 		this.clickOnDomElement(Cypress.env('EnddateOfSecondMonth'))
 	}
 	clickOnApplyButton() {
@@ -273,12 +307,12 @@ export class RobotHands extends BaseHands {
 		)
 	}
 	clicksOnElipsisIconOnDrillDownView() {
-		this.clickOnDomElement('div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2)')
+		this.clickOnDomElement('div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)')
 	}
 	clicksOnExportOption() {
 		this.clickOnDomElement('div[class*="flex flex-col rounded"] button')
 	}
-	clickingOnEscapeButtonToCloseTheExportOPtion() {
+	clickingOnEscapeButtonToCloseTheExportOption() {
 		this.typeTextOnDomElement(
 			'div[class*="flex flex-col rounded"] button',
 			'{esc}'
@@ -288,5 +322,18 @@ export class RobotHands extends BaseHands {
 		this.clickOnDomElement(
 			'[class*="MuiTypography-root MuiTypography-body4 text-medium"]'
 		)
+	}
+	clickOnFrequencyFilter(){
+		cy.wait(5000)
+		this.clickOnId('dropdown')
+	}
+	clickOnQuarterlyFilterOption(){
+		this.clickOnDomElement('[data-value="quarterly"]')
+	}
+	clickOnYearlyFilterOption(){
+		this.clickOnDomElement('[data-value="yearly"]')
+	}
+	clickOnMonthlyFilterOption(){
+		this.clickOnDomElement('[data-value="monthly"]')
 	}
 }

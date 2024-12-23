@@ -16,13 +16,19 @@ export class RobotEyes extends BaseEyes {
 		this.seesIdVisible('loginErrorMessage')
 	}
 	seesWashmetrixOrg() {
-		this.seesDomVisible('img[alt="WashMetrix Car Wash"]')
+		this.seesDomVisible(Cypress.env('SelectOrganisation'))
 	}
 }
 
 export class RobotHands extends BaseHands {
-	clickOnWashmetrixCarWashOrg() {
-		this.clickOnDomElement('img[alt="WashMetrix Car Wash"]')
+	scrollToSeeOrg(){
+		this.wait(3000)
+		// this.scrollIntoElementWithOutIndex(Cypress.env('SelectOrganisation'))
+		this.scrollIntoElementWithOutIndex(Cypress.env('OrgTitle'))
+	}
+	
+	clickOnOrg() {
+		this.clickOnDomElement(Cypress.env('SelectOrganisation'))
 		this.wait(3000)
 	}
 }

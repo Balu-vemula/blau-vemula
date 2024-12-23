@@ -1,5 +1,7 @@
 // / <reference types="Cypress" />
 
+import cypress from 'cypress'
+
 export abstract class BaseEyes {
 	seesTextWithId(id: string, text: string) {
 		cy.get(`#${id}`).should('have.text', text)
@@ -36,6 +38,11 @@ export abstract class BaseEyes {
 
 	seesDomVisible(domlabel: string) {
 		cy.get(domlabel).should('be.visible')
+		return this
+	}
+
+	seesDomElementWithIndex(dom: string, index: number) {
+		cy.get(`${dom}`).eq(index).should('be.visible')
 		return this
 	}
 
@@ -149,6 +156,9 @@ export abstract class BaseEyes {
 			cy.get(dom2).should('not.be.visible')
 		}
 	}
+	seesCheckboxIsSelected(dom: string) {
+		cy.get(`${dom}`).should('be.checked')
+	}
 }
 
 export class BaseHands {
@@ -157,6 +167,56 @@ export class BaseHands {
 		return this
 	}
 
+	intercept(request: string, variable: string, property: string) {
+		cy.intercept(`${request}`, `${variable}`).as('getData')
+		cy.reload()
+		cy.wait(10000)
+		cy.wait('@getData').then((interception) => {
+			if (interception.response?.body.error) {
+				expect(interception.response?.body).to.have.property(
+					'error',
+					'No data found in the specified time range'
+				)
+			} else {
+				expect(
+					interception.response?.body.data.callouts.primary_callouts
+				).to.have.property(`${property}`)
+			}
+			expect(interception.response?.statusCode).to.eq(200)
+		})
+	}
+	frequencyFilter(request: string, variable: string, frequency: string) {
+		cy.reload()
+		cy.wait(5000)
+		cy.intercept(`${request}`, `${variable}`).as('getData')
+		cy.reload()
+		cy.wait(5000)
+		cy.wait('@getData').then((interception) => {
+			if (`${frequency}` == 'quarterly') {
+				expect(interception.response?.statusCode).to.eq(200)
+				expect(
+					interception.response?.body.data.detail_data[0].values[0]
+				).to.have.property('data_frequency', `${frequency}`)
+			} else if (`${frequency}` == 'yearly') {
+				expect(interception.response?.statusCode).to.eq(200)
+				expect(
+					interception.response?.body.data.detail_data[0].values[0]
+				).to.have.property('data_frequency', `${frequency}`)
+			} else if (`${frequency}` == 'Monthly') {
+				expect(interception.response?.statusCode).to.eq(200)
+				expect(
+					interception.response?.body.data.detail_data[0].values[0]
+				).to.have.property('data_frequency', `${frequency}`)
+			} else if (`${frequency}` == 'daily') {
+				cy.reload()
+				cy.wait(5000)
+				expect(interception.response?.statusCode).to.eq(200)
+				expect(
+					interception.response?.body.data.detail_data[0].values[0]
+				).to.have.property('data_frequency', `${frequency}`)
+			}
+		})
+	}
 	clickOnClass(domclass: string) {
 		cy.get(`.${domclass}`).click()
 		return this
@@ -165,6 +225,12 @@ export class BaseHands {
 	clickOnText(text: string) {
 		cy.contains(`${text}`).click()
 		return this
+	}
+	forceClickOnText(text: string) {
+		cy.contains(`${text}`).click({force: true})
+	}
+	forceClickOnDomElement(dom: string) {
+		cy.get(`${dom}`).click({force: true})
 	}
 	clickOnCss(text: string) {
 		cy.get(`${text}`).click()
@@ -220,6 +286,10 @@ export class BaseHands {
 		cy.get(dom).click()
 		return this
 	}
+	clickOnMultipleDomElements(dom:string) {
+		cy.get(dom).click({ multiple: true , force: true})
+		return this 
+	}
 
 	typeTextonDom(locatorName: string, locatorValue: string, text: string) {
 		cy.get(`[${locatorName}="${locatorValue}"]`).type(text, { force: true })
@@ -229,7 +299,7 @@ export class BaseHands {
 		cy.get(dom).type(text)
 		return this
 	}
-
+	
 	typeTextonDomAfterClickWithIndex(
 		locatorName: string,
 		locatorValue: string,
@@ -281,7 +351,17 @@ export class BaseHands {
 		cy.get(`[row-id=${rowId}]`).find('.ag-selection-checkbox').click()
 		return this
 	}
-
+	scrollToNotVisibleElement(dom: string) {
+		cy.get('body').then(($body) => {
+			if ($body.find(`${dom}`).is(':visible')) {
+				console.log('Element is visible',dom)
+			}
+			else {
+				cy.get(`${dom}`).scrollIntoView()
+			}
+		})
+		return this
+	}
 	wait(milliSecs: number) {
 		cy.wait(milliSecs)
 		return this
@@ -326,20 +406,27 @@ export class BaseDependencies {
 		cy.window().then((win) => {
 			win.sessionStorage.clear()
 		})
+		console.log('print user name', Cypress.env('USER_NAME'))
 		cy.viewport(1200, 900)
-		cy.origin('https://qa-washmetrix.auth.us-east-1.amazoncognito.com', () => {
-			cy.get('#signInFormUsername').type(Cypress.env('USER_NAME'), {
-				force: true,
-			})
-			cy.get('#signInFormPassword').type(Cypress.env('PASSWORD'), {
-				force: true,
-			})
-			cy.wait(3000)
-			cy.get('[class="btn btn-primary submitButton-customizable"]').click({
-				multiple: true,
-				force: true,
-			})
+		// Cypress.on('uncaught:exception', (err, runnable) => {
+        //     // Return false to prevent Cypress from failing the test
+        //     if (err.message.includes('e is not iterable')) {
+        //         return false;
+        //     }
+        // })
+		// cy.origin('https://${env}-washmetrix.auth.us-east-1.amazoncognito.com', () => {
+		cy.get('#signInFormUsername').type(Cypress.env('USER_NAME'), {
+			force: true,
 		})
+		cy.get('#signInFormPassword').type(Cypress.env('PASSWORD'), {
+			force: true,
+		})
+		cy.wait(3000)
+		cy.get('[class="btn btn-primary submitButton-customizable"]').click({
+			multiple: true,
+			force: true,
+		})
+		// })
 		return this
 	}
 }

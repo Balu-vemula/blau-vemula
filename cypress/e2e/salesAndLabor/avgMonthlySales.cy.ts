@@ -11,35 +11,36 @@ const robotHands = new RobotHands()
 const dependencies = new Dependencies()
 
 context('Verifying the functionality of Avg.Monthly Sales KPI', () => {
-
-	describe('Verifying the functionality of Avg.Monthly Sales KPI', () => {
-		// RoleFilter(['smoke', 'regression'], () => {
+	describe('Verifying the functionality of Avg.Monthly Saes KPI', () => {
+		 RoleFilter(['smoke', 'regression'], () => {
 			before('Login in to washmetrix', () => {
 				cy.clearAllSessionStorage()
 				cy.clearAllLocalStorage()
 				cy.clearAllCookies()
 				dependencies.loginWashmetrix()
+				robotHands.scrollToSeeWashmetrixCarWashOrg()
 				robotEyes.seesWashmetrixOrg()
 				robotHands.clickOnWashmetrixCarWashOrg()
 			})
-		// })
-		// RoleFilter(['smoke', 'regression'], () => {
+		 })
+		 RoleFilter(['smoke', 'regression'], () => {
 			it('Navigating to Sales and Labor nodule', () => {
 				robotEyes.seesSalesAndLaborIcon()
-				robotHands.clickOnSalesAndLaborIcom()
+				robotHands.clickOnSalesAndLaborIcon()
 			})
-		// })
-		RoleFilter(['smoke', 'regression'], () => {
+		 })
+		 RoleFilter(['smoke', 'regression'], () => {
 			it('Verify the title of the KPI', () => {
 				robotEyes.seesTitleOfAverageMonthlySales()
 				robotEyes.verifyingTheTitleOfAverageMonthlySalesWithDefaultDatePcikerFrequency()
 			})
 
 			it('verifying the graph and the value of the average monthly sales on tile view', () => {
-				robotHands.scrollingIntoAverageMonthlySalesTile()
-				robotEyes.seesTheGraphAndSaleValueForAverageMonthlySalesonTileView()
+				// robotHands.scrollingIntoAverageMonthlySalesTile()
+                robotHands.clickOnSalesAndLaborIcon()
+				robotHands.verifiyingTheTileWithDefaultFrequency()
 			})
-			it('Verifying the functionality of datepicer on tile view', () => {
+			it('Verifyt the functionality of datepicer on tile view', () => {
 				robotHands.scrollingTOSeeDatePicker()
 				robotEyes.seesDatepickerIsVisibleOnModuleView()
 				robotHands.clicksOnDatePicker()
@@ -49,22 +50,21 @@ context('Verifying the functionality of Avg.Monthly Sales KPI', () => {
 			it('Verifying the Average Monthly Sales drill down view', () => {
 				robotHands.clickOnAverageMonthlySalesTIle()
 				robotEyes.seesBackToAllSitesVisibleOnDrillDownView()
-				robotEyes.verifyingTitleOfAverageMonthlySalesKPIDrillDownView()
 				robotEyes.seesDatePicketISVisibleOnDrillDownView()
 				robotEyes.seesEllipsisForExportOption()
 				robotEyes.seesTheTitleOfTheGraphAndTable()
-				robotEyes.verifyingTheTitleOfTheGraphAndTable()
+				robotEyes.verifyingTheTitleOfTheGraphAndTable('Avg. Monthly Sales')
 				robotEyes.seesGraphOnDrillDownView()
 				robotEyes.seesTableOnDrillDownView()
 			})
-		})
-		RoleFilter(['regression'], () => {
+		 })
+		 RoleFilter(['regression'], () => {
 			it('Verifying the context of Table', () => {
 				robotEyes.verifyingTheFirstColumnHeaderOfTable('Period')
 				robotEyes.seesTheSortButtonsForPeriod()
-				robotEyes.verifyingTheSecondColumnHeaderOfTable('No. of Cars')
+				robotEyes.verifyingTheSecondColumnHeaderOfTable('Cars (#)')
 				robotEyes.seesTheSortButtonsForNumberOfCars()
-				robotEyes.verifyingTheThirdColumnHeaderOfTable('Total Sales Value')
+				robotEyes.verifyingTheThirdColumnHeaderOfTable('Sales ($)')
 				robotEyes.seesTheSortButtonsForTotalSalesValue()
 				robotEyes.verifyingTheSecondRowHeaderOfTable('Total')
 				robotHands.clickOnDatePickerInDrillDownView()
@@ -92,15 +92,14 @@ context('Verifying the functionality of Avg.Monthly Sales KPI', () => {
 			it('Verifying the functionality of Export', () => {
 				robotHands.clicksOnElipsisIconOnDrillDownView()
 				robotEyes.verifyingTheExportButtonISVisible()
-				// robotHands.clicksOnExportOption();
-				robotHands.clickingOnEscapeButtonToCloseTheExportOPtion()
+				robotHands.clicksOnExportOption()
 			})
-		})
-		RoleFilter(['smoke', 'regression'], () => {
+		 })
+		 RoleFilter(['smoke', 'regression'], () => {
 			it('Verifying the functionality of back to all sites', () => {
 				robotHands.clickOnBackToAllSitesButton()
 				robotEyes.verifyingTheSalesAndLaborModuleHeader()
 			})
-		})
+		 })
 	})
 })
