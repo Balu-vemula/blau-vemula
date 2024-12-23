@@ -20,4 +20,4 @@ jobs:
       
 
       - name: Run smoke
-        run: docker run -it wm-test-cypress-image
+        run: docker run wm-test-cypress-image

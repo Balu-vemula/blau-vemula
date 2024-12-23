@@ -28,6 +28,8 @@ RUN ls -la /app/
 
 RUN npm install
 RUN npx cypress install
+# RUN npm install cypress-parallel
+# Run npm install concurrently
 RUN npm ci
 RUN npm --version
 RUN npx cypress verify 
