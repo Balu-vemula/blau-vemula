@@ -3,23 +3,31 @@
   "version": "1.0.0",
   "description": "",
   "main": "cypress.config.js",
-  "dependencies": {
-    "cypress": "^12.5.1",
-    "uuid": "^8.3.2",
-    "prettier": "^3.0.2",
-    "ts-node": "^10.2.0"
-  },
   "devDependencies": {
-    "@shelex/cypress-allure-plugin": "^2.35.2",
-    "allure-commandline": "^2.21.0",
-    "cypress-localstorage-commands": "^1.7.0",
-    "cypress-mochawesome-reporter": "^3.2.3",
-    "mocha-allure-reporter": "^1.4.0",
-    "typescript": "^4.8.3"
+    "axios": "^1.6.5",
+    "cypress": "^13.6.3",
+    "cypress-localstorage-commands": "^2.2.5",
+    "cypress-mochawesome-reporter": "^3.8.1",
+    "cypress-multi-reporters": "^1.6.4",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "nodemailer": "^6.9.8",
+    "prettier": "^3.2.4",
+    "typescript": "^5.3.3"
   },
   "scripts": {
-    "format": "prettier --write **/*.{ts,tsx,js,jsx}"
+    "format": "prettier --write **/*.{ts,tsx,js,jsx}",
+    "cypress:run": "cypress run",
+    "cypress:parllel": "concurrently \"npx cypress run --spec 'cypress/e2e/accounting/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/membership/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/configuration/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/consolodatedReport/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/pacing/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/periodVsPeriod/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/permission/**/*.cy.ts' --env TAGS=regression\" \"npx cypress run --spec 'cypress/e2e/salesAndLabor/**/*.cy.ts' --env TAGS=regression\"",
+    "cy:run": "cypress run ",
+     "cy:parallel": "cypress-parallel -s cy:run -t 8 -d cypress/e2e  -a '\"--browser electron --env TAGS=regression\"'"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.1.0",
+    "cypress-parallel": "^0.14.0",
+    "washmetrix": "file:"
+  }
 }

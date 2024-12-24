@@ -1,0 +1,78 @@
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  projectId: 'wr8kve',
+  reporter: 'cypress-multi-reporters',
+  reporterOptions: {
+	  configFile : 'cypress/reporteroptions.json'
+  },
+	
+	e2e: {
+		experimentalStudio: true,
+		chromeWebSecurity: false,
+		experimentalSessionAndOrigin: true,
+		experimentalSessionSupport: true,
+		testIsolation: false,
+		setupNodeEvents(on, config) {
+			require('cypress-mochawesome-reporter/plugin')(on)
+
+			return config
+			this.screenshotOnRunFailure = true
+			// implement node event listeners here
+		},
+		env: {
+			
+			APP_URL: 'https://qa.washmetrix.com/',
+			USER_NAME: 'balaraju.vemula@zemosolabs.com',
+			PASSWORD: '3554145R@j',
+			BUILD_NUMBER: '',
+			RUN_NUMBER: '',
+			SelectedMonth1: "[data-value='Jun']",
+			MonthValue: 'Jun-22',
+			StartTime:"12:00 - 1:00 AM",
+			EnddateOfSecondMonth: "[aria-label*='July 31st']",
+			// SelectOrganisation: "[alt='Dev Testing']",
+			// OrgTitle: "[title='Dev Testing']",
+			// orgName:"Dev Testing",
+			SelectOrganisation: "[alt='WashMetrix Car Wash']",
+			OrgTitle: "[title='WashMetrix Car Wash']",
+			orgName:"WashMetrix Car Wash",
+			// SelectOrganisation: "[alt='Alpine Wash LLC']",
+			// OrgTitle: "[title='Alpine Wash LLC']",
+			// orgName: "Alpine Wash LLC",
+			INDIVIDUAL_WASH: "https://svc-qa.washmetrix.com/sales-and-labor/individual-wash",
+			AVGMONTHLY:"https://svc-qa.washmetrix.com/sales-and-labor/average-monthly-sales",
+			TOTALWASHSALES:"https://svc-qa.washmetrix.com/sales-and-labor/total-wash-sales",
+			TOTALCARSWASHED: "https://svc-qa.washmetrix.com/sales-and-labor/total-cars-washed",
+			BUSIEST_DAY:"https://svc-qa.washmetrix.com/sales-and-labor/busiest-day-of-the-week",
+			AvgDailySales: "https://svc-qa.washmetrix.com/sales-and-labor/average-daily-sales",
+			CashVsCard: "https://svc-qa.washmetrix.com/sales-and-labor/cash-vs-card",
+			CARS_PER_LABOR_HR:"https://svc-qa.washmetrix.com/sales-and-labor/cars-per-labor-hour",
+			HourlyWashVolume: "https://svc-qa.washmetrix.com/sales-and-labor/hourly-wash-volume",
+			LaborPercentageofTotalSales: "https://svc-qa.washmetrix.com/sales-and-labor/labor-percentage-total-sales",
+			TotalLabor: "https://svc-qa.washmetrix.com/sales-and-labor/total-labor",
+			MonthlyMembershipBilling: "https://svc-qa.washmetrix.com/membership/monthly-membership-billing",
+			AvgClubUseByAccounts: "https://svc-qa.washmetrix.com/membership/monthly-avg-club-use",
+			NewMembershipSales: "https://svc-qa.washmetrix.com/membership/new-membership-sales",
+			AvgDailyConversionRate: "https://svc-qa.washmetrix.com/membership/avg-daily-conversion-rate",
+			MembershipPercentageofTotalSales: "https://svc-qa.washmetrix.com/membership/membership-percentage-of-total-sales",
+			ChurnRateBtAccounts: "https://svc-qa.washmetrix.com/membership/monthly-churn-rate",
+			GrowthRateBtAccounts: "https://svc-qa.washmetrix.com/membership/monthly-growth-rate",
+			CaptureRate:"https://svc-qa.washmetrix.com/membership/capture-rate",
+			AvgCostPerCar:"https://svc-qa.washmetrix.com/accounting/avg-cost-per-car",
+			AvgNetIncomePerCar:"https://svc-qa.washmetrix.com/accounting/average-net-income-per-car",
+			CurrentProfitAndLoss:"https://svc-qa.washmetrix.com/accounting/current-profit-and-loss",
+			ChemicalCostPerCar:"https://svc-qa.washmetrix.com/accounting/chemical-cost-per-car",
+			SuppliesCostPerCar:"https://svc-qa.washmetrix.com/accounting/supplies-cost-per-car",
+			WaterCostPerCar:"https://svc-qa.washmetrix.com/accounting/water-cost-per-car",
+			ElectricCostPerCar:"https://svc-qa.washmetrix.com/accounting/electric-cost-per-car",
+			MAFCostPerCar:"https://svc-qa.washmetrix.com/accounting/maf-cost-per-car",
+			RandMCostPerCar:"https://svc-qa.washmetrix.com/accounting/r-and-m-cost-per-car",
+			DamagesCostPerCar:"https://svc-qa.washmetrix.com/accounting/damages-cost-per-car",
+			LaborCostPerCar:"https://svc-qa.washmetrix.com/accounting/labor-cost-per-car-accounting",
+			PAndLComparison:"https://svc-qa.washmetrix.com/accounting/profit-and-loss-comparison",
+			LaborPercentageofIncome:"https://svc-qa.washmetrix.com/accounting/labor-percentage-of-income",
+			ActiveMembers:"https://svc-qa.washmetrix.com/membership/membership-activity",
+		},
+	},
+})

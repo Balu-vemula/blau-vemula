@@ -9,7 +9,7 @@ export class Dependencies extends BaseDependencies {
 export class RobotEyes extends BaseEyes {
 	seesWashmetrixOrg() {
 		this.wait(5000)
-		this.seesDomVisible('img[alt="WashMetrix Car Wash"]')
+		this.seesDomVisible(Cypress.env('SelectOrganisation'))
 	}
 	seesSalesAndLaborIcon() {
 		this.wait(5000)
@@ -18,18 +18,18 @@ export class RobotEyes extends BaseEyes {
 	seesTitleOfAverageMonthlySales() {
 		this.seesDomVisibleWithCustomMatcher(
 			'title',
-			'Avg. Monthly Sales (Year To Date)'
+			'Avg. Monthly Sales (YTD)'
 		)
 	}
 	verifyingTheTitleOfAverageMonthlySalesWithDefaultDatePcikerFrequency() {
 		this.seesDomContainText(
-			'[title="Avg. Monthly Sales (Year To Date)"]',
-			'Avg. Monthly Sales (Year To Date)'
+			'[title*="Avg. Monthly Sales"]',
+			'Avg. Monthly Sales (YTD)'
 		)
 	}
 	seesTheGraphAndSaleValueForAverageMonthlySalesonTileView() {
 		this.seesElementIsVisibleWhenTheOtherElementISPresent(
-			'div[title="Avg. Monthly Sales (Year To Date)"] h1',
+			'div[title*="Avg. Monthly Sales"] h1',
 			'#AVERAGE_MONTHLY_SALES'
 		)
 	}
@@ -69,27 +69,21 @@ export class RobotEyes extends BaseEyes {
 	seesBackToAllSitesVisibleOnDrillDownView() {
 		cy.wait(5000)
 		this.seesDomContainText(
-			'[class="MuiTypography-root MuiTypography-body4 text-medium css-1qn7rz9"]',
-			'Back to All Sites'
+			'[class*="MuiTypography-root MuiTypography-body4 text-medium"]',
+			'Back to Sales & Labor'
 		)
-	}
-	seesTitleOfAverageMonthlySalesKPIDrillDownView() {
-		this.seesDomVisible('div[class*=full] div>p')
-	}
-	verifyingTitleOfAverageMonthlySalesKPIDrillDownView() {
-		this.seesDomContainText('div[class*=full] div>p', 'Average Monthly Sales')
 	}
 	seesDatePicketISVisibleOnDrillDownView() {
 		this.seesDomVisible('button[aria-describedby="AVERAGE_MONTHLY_SALES"]')
 	}
 	seesTheTitleOfTheGraphAndTable() {
-		this.seesDomVisible('div[class*=full] div>h6')
+		this.seesDomVisible('div[class*=h-full] div>h4')
 	}
-	verifyingTheTitleOfTheGraphAndTable() {
-		this.seesDomContainText('div[class*=full] div>h6', 'Monthly Sales')
+	verifyingTheTitleOfTheGraphAndTable(text: any) {
+		this.seesDomContainText('div[class*=h-full] div>h4', text)
 	}
 	seesEllipsisForExportOption() {
-		this.seesDomVisible('div[class="flex items-center gap-2"]')
+		this.seesDomVisible('div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2)')
 	}
 	seesGraphOnDrillDownView() {
 		this.seesIdVisible('drill-down-AVERAGE_MONTHLY_SALES')
@@ -139,20 +133,20 @@ export class RobotEyes extends BaseEyes {
 	}
 	verifyTheCancelButtonInTheDatePickerInDrillDownViewForAverageMonthlySales() {
 		this.seesDomVisible(
-			'div[class="flex items-center gap-2 justify-end mr-3 mb-3"] button:nth-child(1)'
+			'div[role="presentation"] div:nth-child(2) button:nth-child(1)'
 		)
 		this.sessTextWithDomAndIndex(
-			'div[class="flex items-center gap-2 justify-end mr-3 mb-3"] button',
+			'div[role="presentation"] div:nth-child(2) button',
 			0,
 			'Cancel'
 		)
 	}
 	verifyTheApplyButtonInTheDatePickerInDrillDownViewFOrAverageMonthlySales() {
 		this.seesDomVisible(
-			'div[class="flex items-center gap-2 justify-end mr-3 mb-3"] button:nth-child(2)'
+			'div[role="presentation"] div:nth-child(2) button:nth-child(2)'
 		)
 		this.sessTextWithDomAndIndex(
-			'div[class="flex items-center gap-2 justify-end mr-3 mb-3"] button',
+			'div[role="presentation"] div:nth-child(2) button',
 			1,
 			'Apply'
 		)
@@ -165,25 +159,34 @@ export class RobotEyes extends BaseEyes {
 		)
 	}
 	verifyingTheAccordingIConNextToTheMonthInTheTable() {
-		this.seesDomVisible('tbody tr td div span:nth-child(2)')
+		this.seesDomVisible('tbody tr td div span path')
 	}
 	verifyingTheExportButtonISVisible() {
-		this.seesDomVisible('[class="flex flex-col p-2 rounded"] button')
+		this.seesDomVisible('div[class*="flex flex-col rounded"] button')
 	}
 	verifyingTheSalesAndLaborModuleHeader() {
 		this.seesDomContainText('[class="flex flex-col gap-2"]', 'Sales & Labor')
 	}
 }
 export class RobotHands extends BaseHands {
+	scrollToSeeWashmetrixCarWashOrg(){
+		this.wait(3000)
+		// this.scrollIntoElementWithOutIndex(Cypress.env('SelectOrganisation'))
+		this.scrollIntoElementWithOutIndex(Cypress.env('OrgTitle'))
+	}
 	clickOnWashmetrixCarWashOrg() {
-		this.clickOnDomElement('img[alt="WashMetrix Car Wash"]')
+		this.clickOnDomElement(Cypress.env('SelectOrganisation'))
 		this.wait(3000)
 	}
-	clickOnSalesAndLaborIcom() {
+	clickOnSalesAndLaborIcon() {
 		this.clickOnDomElement('[aria-label="Sales & Labor"]')
 	}
 	scrollingIntoAverageMonthlySalesTile() {
-		this.scrollIntoElement('[title="Avg. Monthly Sales (Year To Date)"]', 0)
+		this.scrollIntoElement('[title*="Avg. Monthly Sales"]', 0)
+		cy.reload()
+	}
+	verifiyingTheTileWithDefaultFrequency(){
+		this.intercept("POST",Cypress.env('AVGMONTHLY'),"average_sales")
 	}
 	clicksOnDatePicker() {
 		this.clickOnDomElement('[aria-describedby="2"]')
@@ -193,9 +196,9 @@ export class RobotHands extends BaseHands {
 	}
 	selectsTrailing12OnTileView() {
 		this.clickOnDomElement(
-			'div[class="grid grid-flow-col grid-cols-[auto_auto_1fr] bg-white w-min"] button:nth-child(12)'
+			'button[id="trailing12"]'
 		)
-		this.clickOnClass('css-1e5udjs')
+		this.clickOnDomElement('div[role="presentation"] div div:nth-child(2) button:nth-child(2)')
 	}
 	clickOnAverageMonthlySalesTIle() {
 		cy.wait(5000)
@@ -250,7 +253,7 @@ export class RobotHands extends BaseHands {
 	}
 	clickOnApplyButton() {
 		this.clickOnDomElementWithIndex(
-			'div[class="flex items-center gap-2 justify-end mr-3 mb-3"] button',
+			'div[role="presentation"] div:nth-child(2) button',
 			1
 		)
 	}
@@ -270,20 +273,20 @@ export class RobotHands extends BaseHands {
 		)
 	}
 	clicksOnElipsisIconOnDrillDownView() {
-		this.clickOnDomElement('[class="flex items-center gap-2"] button')
+		this.clickOnDomElement('div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2)')
 	}
 	clicksOnExportOption() {
-		this.clickOnDomElement('[class="flex flex-col p-2 rounded"] button')
+		this.clickOnDomElement('div[class*="flex flex-col rounded"] button')
 	}
 	clickingOnEscapeButtonToCloseTheExportOPtion() {
 		this.typeTextOnDomElement(
-			'[class="flex flex-col p-2 rounded"] button',
+			'div[class*="flex flex-col rounded"] button',
 			'{esc}'
 		)
 	}
 	clickOnBackToAllSitesButton() {
 		this.clickOnDomElement(
-			'[class="MuiTypography-root MuiTypography-body4 text-medium css-1qn7rz9"]'
+			'[class*="MuiTypography-root MuiTypography-body4 text-medium"]'
 		)
 	}
 }

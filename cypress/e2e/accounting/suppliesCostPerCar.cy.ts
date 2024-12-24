@@ -1,0 +1,179 @@
+import '../../support/e2e'
+import {
+	RobotEyes,
+	RobotHands,
+	Dependencies,
+} from '../../robots/wm/accounting/costPerCar'
+import RoleFilter from '../../support/filter'
+
+const robotEyes = new RobotEyes()
+const robotHands = new RobotHands()
+const dependencies = new Dependencies()
+
+context('Verifying the functionality of Supplies Cost Per Car KPI', () => {
+	describe('Verifying the functionality of Supplies Cost Per Car KPI', () => {
+		 RoleFilter(['smoke', 'regression'], () => {
+			before('Login in to washmetrix', () => {
+				cy.clearAllSessionStorage()
+				cy.clearAllLocalStorage()
+				cy.clearAllCookies()
+				dependencies.loginWashmetrix()
+				robotHands.scrollingIntoOrganisation()
+				robotEyes.seesWashmetrixOrg()
+				robotHands.clickOnWashmetrixCarWashOrg()
+			})
+			it('Navigating to Accounting Module', () => {
+				robotEyes.seesAccountingIcon()
+				robotHands.clickOnAccountingIcon()
+			})
+			it('Verifying the title of the KPI', () => {
+				robotHands.scrollingIntoTile('[title*="Supplies Cost Per Car"]',0)
+				robotEyes.seesTitleOfKPI('[title*="Supplies Cost Per Car"]','Supplies Cost Per Car (YTD)')
+				robotEyes.verifyingTheTitleWithDefaultDatePickerFrequency('[title*="Supplies Cost Per Car"]','Supplies Cost Per Car (YTD)')
+			})
+
+			it('Verifying the graph and the value of the Supplies Cost Per Car on the tile view', () => {
+				robotHands.scrollingIntoTile('[title*="Supplies Cost Per Car"]',0)
+				robotHands.clickOnAccountingIcon()
+				robotHands.verifiyingTheTileWithDefaultFrequency(Cypress.env('SuppliesCostPerCar'),"supplies_cost_per_car")
+			})
+
+			it('Verifying the functionality of the date picker on the tile view', () => {
+				robotHands.scrollingToSeeDatePicker()
+				robotEyes.seesDatepickerIsVisibleOnModuleView()
+				robotHands.clicksOnDatePicker()
+				robotHands.selectsTrailing12OnTileView()
+				robotHands.scrollingIntoTileAfterChangingTheFrequencyFromDefault('[title="Supplies Cost Per Car "]', 0)
+				robotEyes.veryfingTheTitleOfTileViewAfterChangingTheFrequencyFromDefault('[title="Supplies Cost Per Car "]','Supplies Cost Per Car ')
+			})
+
+			it('Verifying the Supplies Cost Per Car drill-down view', () => {
+				robotHands.clickOnTile('div[title="Supplies Cost Per Car "]')
+				robotEyes.seesBacktoAccountingVisibleOnDrillDownView()
+				robotEyes.seesDatePickerIsVisibleOnDrillDownView()
+				robotEyes.seesEllipsisForExportOption()
+				robotEyes.seesTheTitleOfTheGraphAndTable()
+				robotEyes.verifyingTheTitleOfTheGraphAndTable('Costs Per Car')
+				robotEyes.seesGraphOnDrillDownView()
+				robotEyes.seesTableOnDrillDownView()
+				robotHands.clickOnTopNavigationBarInDrillDownView()
+				robotEyes.seesTheSerchBoxAfterClickingTheTopNavigationBar()
+				robotEyes.verifyingTheSerchBoxAfterClickingTheTopNavigationBarInDrillDownView()
+				robotEyes.verifyingTheTopNavigationBarLocationsInDrillDownView()
+				robotEyes.verifyTheCancelButtonInTheLocationInDrillDownViewForCostPerCar()
+				robotEyes.verifyTheApplyButtonInTheLocationInDrillDownViewForCostPerCar()
+				robotHands.clickOnLocationDropDownApplyButton()
+			})
+		 })
+
+		 RoleFilter(['regression'], () => {
+			it('Verifying the context of Table', () => {
+				robotEyes.verifyTheTableHeaderInDrillDownViewForCostPerCar()
+				robotEyes.seesTheSortButtonsForPeriod()
+				robotEyes.seesTheSortButtonsForTotalCars()
+				robotEyes.seesTheSortButtonsForChemical()
+				robotEyes.seesTheSortButtonsForSupplies()
+				robotEyes.seesTheSortButtonsForWater()
+				robotEyes.seesTheSortButtonsForElectric()
+				robotHands.scrollingIntoVerifyingTheContextOfHeaderOfTable()
+				robotEyes.seesTheSortButtonsForMAF()			
+				robotEyes.seesTheSortButtonsForRAndM()
+				robotEyes.seesTheSortButtonsForDamages()
+				robotEyes.seesTheSortButtonsForLabor()
+				robotEyes.seesTheSortButtonsForLaborPerCar()
+				robotHands.scrollingIntoVerifyingTheContextOfHeaderOfTable1()
+				robotEyes.seesTheSortButtonsForChemPerCar()
+				robotEyes.seesTheSortButtonsForSuppliesPerCar()
+				robotEyes.seesTheSortButtonsForWaterPerCar()
+				robotEyes.seesTheSortButtonsForElectricPerCar()
+				robotEyes.seesTheSortButtonsForMAFPerCar()
+				robotHands.scrollingIntoVerifyingTheContextOfHeaderOfTable2()
+				robotEyes.seesTheSortButtonsForRAndMPerCar ()
+				robotEyes.seesTheSortButtonsForDamagesPerCar()
+				robotHands.clickOnDatePickerInDrillDownView()
+				robotEyes.verifyTheDatePickerFrequenciesInDrillDownViewForCostPerCar()
+				robotEyes.verifyTheCancelButtonInTheDatePickerInDrillDownViewForCostPerCar()
+				robotEyes.verifyTheApplyButtonInTheDatePickerInDrillDownViewForCostPerCar()
+				robotHands.clickOnYearDropDownInTheDatePicker()
+				robotHands.selectYearFromTheYearDropDownInDatePicker()
+				robotHands.clickOnMonthDropDownInTheDatePicker()
+				robotHands.selectMonthFromTheMonthlyDropDownInDatePicker()
+				robotHands.selectFirstDayInTheDateRange()
+				robotHands.clickOnNextMonthIcon()
+				robotHands.selectLastDayInTheDateRange()
+				robotHands.clickOnApplyButton()
+				robotEyes.seesFrequencyFilter()
+				robotHands.clickOnFrequencyFilter()
+				robotEyes.seesQuarterlyFilterOption()
+				robotHands.clickOnQuarterlyFilterOption()
+				robotHands.verifyingQuarterlyFrequency(Cypress.env('SuppliesCostPerCar'))
+				robotHands.clickOnFrequencyFilter()
+				robotEyes.seesYearlyFilterOption()
+				robotHands.clickOnYearlyFilterOption()
+				robotHands.verifyingYearlyFrequency(Cypress.env('SuppliesCostPerCar'))
+				robotHands.clickOnFrequencyFilter()
+				robotEyes.seesMonthlyFilterOption()
+				robotHands.clickOnMonthlyFilterOption()
+				robotHands.verifyingMonthlyFrequency(Cypress.env('SuppliesCostPerCar'))
+				robotEyes.verifyingStartTimeOnTheTable()
+			})
+
+			it('Verifying the functionality of sort', () => {
+				robotHands.clicksOnDescendingOrderPeriodButton()
+				robotHands.clicksOnAscendingOrderPeriodButton()
+				robotHands.clicksOnDescendingOrderTotalCarsButton()
+				robotHands.clicksOnAscendingOrderTotalCarsButton()
+				robotHands.clicksOnDescendingOrderChemicalButton()
+				robotHands.clicksOnAscendingOrderChemicalButton()
+				robotHands.clicksOnDescendingOrderSuppliesButton()
+				robotHands.clicksOnAscendingOrderSuppliesButton()
+
+				robotHands.clicksOnDescendingOrderWaterButton()
+				robotHands.clicksOnAscendingOrderWaterButton()
+				robotHands.clicksOnDescendingOrderElectricButton()
+				robotHands.clicksOnAscendingOrderElectricButton()
+				robotHands.clicksOnDescendingOrderMAFButton()
+				robotHands.clicksOnAscendingOrderMAFButton()
+				robotHands.clicksOnDescendingOrderRAndMButton()
+				robotHands.clicksOnAscendingOrderRAndMButton()
+
+				robotHands.clicksOnDescendingOrderDamagesButton()
+				robotHands.clicksOnAscendingOrderDamagesButton()
+				robotHands.clicksOnDescendingOrderLaborButton()
+				robotHands.clicksOnAscendingOrderLaborButton()
+				robotHands.clicksOnDescendingOrderLaborPerCarButton()
+				robotHands.clicksOnAscendingOrderLaborPerCarButton()
+				robotHands.clicksOnDescendingOrderChemPerCarButton()
+				robotHands.clicksOnAscendingOrderChemPerCarButton()
+
+				robotHands.clicksOnDescendingOrderSuppliesPerCarButton()
+				robotHands.clicksOnAscendingOrderSuppliesPerCarButton()
+				robotHands.clicksOnDescendingOrderWaterPerCarButton()
+				robotHands.clicksOnAscendingOrderWaterPerCarButton()
+				robotHands.clicksOnDescendingOrderElectricPerCarButton()
+				robotHands.clicksOnAscendingOrderElectricPerCarButton()
+				robotHands.clicksOnDescendingOrderMAFPerCarButton()
+				robotHands.clicksOnAscendingOrderMAFPerCarButton()
+
+				robotHands.clicksOnDescendingOrderRAndMPerCarButton()
+				robotHands.clicksOnAscendingOrderRAndMPerCarButton()
+				robotHands.clicksOnDescendingOrderDamagesPerCarButton()
+				robotHands.clicksOnAscendingOrderDamagesPerCarButton()
+
+			})
+
+			it('Verifying the functionality of Export', () => {
+				robotHands.clicksOnElipsisIconOnDrillDownView()
+				robotEyes.verifyingTheExportButtonIsVisible()
+				robotHands.clicksOnExportOption();
+			})
+		 })
+
+		 RoleFilter(['smoke', 'regression'], () => {	
+			it('Verifying the functionality of Back to all sites', () => {
+				robotHands.clickOnBackToAllSitesButton()
+				robotEyes.verifyingTheAccountingModuleHeader()
+			})
+		})
+	})
+})
